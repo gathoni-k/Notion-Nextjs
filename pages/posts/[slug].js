@@ -68,3 +68,4 @@ export const getStaticPaths = async (
 };
 
 export default Post;
+export const runtime = 'experimental-edge';
