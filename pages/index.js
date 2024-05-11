@@ -2,6 +2,13 @@ import Head from 'next/head'
 import Link from 'next/link';
 import { getAllPublished } from '../lib/notion';
 import styles from '../styles/Home.module.css'
+import Navbar from '../navbar/navbar';
+export  function nav() {
+  return <div>
+      <Navbar/>
+    </div>
+}
+
 export default function Home({posts}) {
   if(!posts) return <h1>No posts</h1>
   return (
@@ -16,8 +23,8 @@ export default function Home({posts}) {
         {posts.map((post, index) => (
           <section key={index} className={styles.card}>
             <div>
-                <h2><Link href={`/posts/${post.slug}`}>
-                <a className={styles.action}>{post.title}</a>
+                <h2><Link href={`/posts/${post.slug}`} className={styles.action}>
+                {post.title}
                 </Link></h2>
                 <div>
                     {post.date}
@@ -30,7 +37,7 @@ export default function Home({posts}) {
         ))}
       </main>
     </div>
-  )
+  );
 }
 export const getStaticProps = async () => {
   const data = await getAllPublished()
