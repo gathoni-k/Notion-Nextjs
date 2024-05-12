@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) blog powered by [Notion](https://notion.so)
-
-## Getting Started
+This is also my primary blog and is getting loads of updates soon. 
+## Getting Started for forkers
 Create a Notion database with the following fields.
 * Name - The title of the blog post.
 * Slug - The URL of a post.
@@ -23,15 +23,4 @@ npm run dev
 # or
 yarn dev
 ```
-#### Deploy with Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgathoni-k%2FNotion-Nextjs&env=NOTION_TOKEN,DATABASE_ID&project-name=notion-nextjs-blog&demo-title=Notion%20%2B%20Nextjs%20Blog&demo-description=A%20statically%20generated%20Next.js%20blog%20powered%20by%20Notion&demo-url=https%3A%2F%2Fnextjs-blog-beta-one-81.vercel.app%2F)
-
-#### Deploy with Netlify
-
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gathoni-k/Notion-Nextjs)
-
-Check out this repo's [deployed version](https://nextjs-blog-beta-one-81.vercel.app/).
-
-
 
