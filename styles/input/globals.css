@@ -1,4 +1,9 @@
 @import url(https://fonts.bunny.net/css?family=poppins:400);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -110,3 +115,37 @@ nav{
    width: 100%;
   }
 }
+.container {
+  padding: 0 2rem;
+}
+
+.main {
+  padding: 4rem;
+}
+
+.card {
+  margin: 1rem 0;
+  padding: 1.5rem;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  position: relative;
+}
+.card:hover{
+  border-color: blue;
+}
+.card a{
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 200ms;
+}
+.card a::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+

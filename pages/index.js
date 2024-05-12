@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link';
 import { getAllPublished } from '../lib/notion';
-import styles from '../styles/Home.module.css'
-import Navbar from '../navbar/navbar';
 export  function nav() {
   return <div>
       <Navbar/>
