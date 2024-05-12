@@ -3,7 +3,6 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { getAllPublished, getSingleBlogPostBySlug } from "../../lib/notion";
-import styles from '../../styles/Home.module.css';
 
 const CodeBlock = ({ language, codestring }) => {
   return (
