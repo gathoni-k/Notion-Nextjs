@@ -1,5 +1,5 @@
 This is a [Next.js](https://nextjs.org/) blog powered by [Notion](https://notion.so)
-This is also my primary blog and is getting loads of updates soon. 
+This will be a template soon (this used to be my main blog see the other repo for that) this soon will be app router and Next 15. It will also usr ts instead of js
 ## Getting Started for forkers
 Create a Notion database with the following fields.
 * Name - The title of the blog post.
