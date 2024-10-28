@@ -8,7 +8,8 @@ import { Separator } from '@/components/ui/separator';
 import { CalendarDays, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { getSingleBlogPostBySlug, getAllPublished } from '@/lib/notion';
+import { getSingleBlogPostBySlug } from '@/lib/notion';
+import { notFound } from 'next/navigation';
 
 // Types
 interface CodeBlockProps {
@@ -28,7 +29,6 @@ interface BlogPost {
   markdown: string;
 }
 
-// Code block component using Shiki
 const CodeBlock = async ({ language = 'text', value }: CodeBlockProps) => {
   const highlighted = await codeToHtml(value, {
     lang: language || 'bash',
@@ -43,14 +43,18 @@ const CodeBlock = async ({ language = 'text', value }: CodeBlockProps) => {
   );
 };
 
-// Generate metadata
 export async function generateMetadata(
-  props: { 
-    params: Promise<{ slug: string }>
-  }
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-  const { slug } = (await props.params);
+  const { slug } = await params;
   const post = await getSingleBlogPostBySlug(slug);
+  
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+      description: 'The requested blog post could not be found',
+    };
+  }
 
   return {
     title: post.metadata.title,
@@ -58,35 +62,28 @@ export async function generateMetadata(
   };
 }
 
-// Generate static params
-export async function generateStaticParams() {
-  const posts = await getAllPublished();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-// Main post component
-export default async function Post(
-  props0: { 
-    params: Promise<{ slug: string }> 
-  }
-) {
-  const params = await props0.params;
-  const { slug } = params;
+export default async function Post({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params;
   const post = await getSingleBlogPostBySlug(slug);
 
-  // Ensure markdown is a string
+  if (!post) {
+    notFound();
+  }
+
   const getMarkdownContent = (content: any) => {
     if (typeof content === 'string') {
       try {
         const parsed = JSON.parse(content);
-        return parsed.parent || parsed; // Extract from parent field if it exists
+        return parsed.parent || parsed;
       } catch {
-        return content; // Return as-is if it's not JSON
+        return content;
       }
     } else if (content && typeof content === 'object') {
-      return content.parent || content; // Extract from parent field if it exists
+      return content.parent || content;
     }
     return '';
   };
@@ -94,7 +91,7 @@ export default async function Post(
   const markdownContent = getMarkdownContent(post.markdown);
 
   return (
-    (<article className="container mx-auto py-8 px-4">
+    <article className="container mx-auto py-8 px-4">
       <Link href="/">
         <Button variant="ghost" className="mb-8 gap-2">
           <ArrowLeft className="h-4 w-4" />
@@ -134,21 +131,18 @@ export default async function Post(
                 const value = String(children).replace(/\n$/, '');
                 
                 if (!inline && match) {
-                  // For code blocks
                   return CodeBlock({
                     value,
                     language: match[1],
                   });
                 }
                 
-                // For inline code
                 return (
                   <code className={className} {...props}>
-                  {children}
-                </code>
+                    {children}
+                  </code>
                 );
               },
-              // Customize other markdown elements
               h2: ({ children }) => (
                 <h2 className="text-2xl font-bold tracking-tight mt-8 mb-4">{children}</h2>
               ),
@@ -173,6 +167,6 @@ export default async function Post(
           </ReactMarkdown>
         </CardContent>
       </Card>
-    </article>)
+    </article>
   );
 }
