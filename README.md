@@ -2,11 +2,13 @@ This is a [Next.js](https://nextjs.org/) blog powered by [Notion](https://notion
 
 # Tech Stack
 
-* NextJs 15 app router
-* React-markdown for markdown rendering
-* Lucide React for icons
-* Tailwindcss and Shadcn/ui for styles
-* Shiki for markdown synatx higlighting
+- NextJs 15 app router
+- React-markdown for markdown rendering
+- Lucide React for icons
+- Tailwindcss and Shadcn/ui for styles
+- Shiki for markdown syntax highlighting
+- Notion JS client and react-notion-x
+- Vercel for automated git synced deployments
 
 ## Getting Started for forkers
 
