@@ -1,7 +1,0 @@
-[build]
-  command = "npm run build"
-  publish = ".next"
-  
-[template.environment]
-  NOTION_TOKEN = "Set notion token"
-  DATABASE_ID = "Set the database ID"
